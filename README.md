@@ -5,3 +5,10 @@ Steps to use
 ````
  oop_project_env\Scripts\activate.bat
 ````
+
+
+2. Download the files in the folder ArticleGate
+````
+ pip install pillow
+ pip install django-crispy-forms
+````
