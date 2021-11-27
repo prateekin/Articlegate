@@ -15,7 +15,7 @@ def profile(request):
             u_form.save()
             p_form.save()
             messages.success(request, f" Your profile has been updated")
-            return redirect('profile')
+            return redirect('profileView')
     else:
         u_form = UserUpdateForm(instance=request.user)
         p_form = ProfileUpdateForm(instance=request.user.profile)
@@ -25,6 +25,15 @@ def profile(request):
     }
 
     return render(request, 'user/profile.html',context) 
+
+
+@login_required
+def profileView(request):
+    user = request.user
+    context = {
+        'user' : user
+    }
+    return render(request, 'user/profileview.html',context)
 
 
 
