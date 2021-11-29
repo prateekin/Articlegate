@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Article Gate | Full Article</title>
+</head>
+<body>
+    <h1>WELCOME</h1>
+    <div>Title :{{ post.title }}</div>
+    <div>Author : {{ post.author }}</div>
+    <div>Date : {{ post.date_posted }}</div>
+    <div>content : {{ post.content }}</div>
+    <div id="likes">Likes : {{ post.likes }}</div>
+    <div>Views : {{ post.views }}</div>
+    
+    <!-- <form action="" method="get">
+        <button name="likes" type="submit"> Like </button>
+    </form> -->
+    <button id="likebutton" onclick="likeFunc()">Like</button>
+    <!-- <a href="#">Make Changes.</a> -->
+    <a href="{% url 'article:editArticle' post.title post.id %}">Make Changes.</a>
+    <h1>Comments</h1>
+    <button onclick="myFunc()">Add comment</button>
+    <form action="" method="post" id="formId">
+        {% csrf_token %}
+        <input type="text" name="addComment" id="addComment">
+        <button type="submit">Comment</button>
+    </form>
+    {% for comment in comments %}
+
+        <p> >>> {{ comment.comment}}</p>
+        <p>Date   : {{ comment.date_posted|date:"F d, Y" }}</p>
+        <p>likes : {{ comment.likes }}</p>
+
+    {% empty %}
+        Not comments For Now.
+    {% endfor %}
+
+</body>
+
+<script>
+    if (localStorage.getItem('like') == null){
+        let l = {};
+    }
+    
+
+        let postid = {{ post.id }};
+        let postlikes = {{ post.likes }};
+        let isLiked = 0;
+        l = JSON.parse(localStorage.getItem('likes'));
+        function likeFunc(){
+            if (l[postid] == 0){
+            postlikes +=1;
+            l[postid] = 1;
+            localStorage.setItem('likestable',JSON.stringify(l));
+            document.getElementById('likes').innerHTML = `Likes : ${postlikes} `;
+        }
+        if (l[postid] == 1){
+            postlikes -=1;
+            l[postid] = 0;
+            localStorage.setItem('likestable',JSON.stringify(l));
+            document.getElementById('likes').innerHTML = `Likes : ${postlikes} `;
+        }
+    };
+
+</script>
+
+<script>
+    document.getElementById('formId').style.display = "none";
+function myFunc(){
+    if (document.getElementById('formId').style.display == "none"){
+        document.getElementById('formId').style.display = "inline";
+    }
+    else{
+        document.getElementById('formId').style.display = "none";
+    }
+}
+</script>
+</html>

@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,10 +6,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home Page</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'article/style.css' %}">
 </head>
 <body>
     {% for post in posts %}
+    <a href="{% url 'article:fullArticle' post.title post.id %}">
         <h3>Title : {{ post.title }}</h3>
+    </a>
         <p>Content: {{ post.content}}</p>
         <p>Author : {{ post.author }}</p>
         <p>Date   : {{ post.date_posted|date:"F d, Y" }}</p>

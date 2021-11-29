@@ -26,7 +26,7 @@ urlpatterns = [
     path('logout/',auth_views.LogoutView.as_view(template_name='user/logout.html'), name = 'logout'),
     path('signup/', user_views.signUp ,name='signUp'),
     path('profile/', user_views.profile ,name='profile'),
-    path('profileview/', user_views.profileView ,name='profileView'),
+    path('profileview/', user_views.profileView ,name='profileView')
     # path('', include('user.urls')), 
 ]
 

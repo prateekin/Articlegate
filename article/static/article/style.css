@@ -1,0 +1,15 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    background: aquamarine;
+}
+a{
+    text-decoration: none;
+}
+
+.check{
+    height: 50px;
+    background-color: black;
+}

@@ -76,6 +76,7 @@
 <body>
     <form method="POST">
         {% csrf_token %}
+
         <div>
             <fieldset>
                 {{ form|crispy }}

@@ -1,0 +1,25 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Article Gate | ADD Article</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'article/style.css' %}">
+</head>
+<body>
+    <h1>ADDING ARTICLE</h1>
+    <form action="{% url 'article:addArticle' %}" method="POST">
+        {% csrf_token %}
+        <div>
+            <input class="title" type="text" name="title" placeholder="TITLE HERE">
+        </div>
+        <div>
+            <input class="content" type="text" name="content" placeholder="Write Here" size="200">
+        </div>
+        <button type="submit">ADD ARTICLE</button>
+    </form>
+    
+</body>
+</html>
