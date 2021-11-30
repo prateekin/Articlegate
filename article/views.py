@@ -16,11 +16,13 @@ def home(request):
 
 def fullArticle(request,title,article_id):
     # print(article_id)
+    # user = User.objects.get(id=request.user.pk)
     post = Post.objects.get(id=article_id)
     comments = post.comment_set.order_by('-date_posted')
     context = {
         'post':post,
         'comments':comments,
+        # 'user':user
         }
 
     # if request.method == 'GET':
@@ -100,3 +102,12 @@ def search(request):
     }
     return render(request, 'article/search.html',context)
     # return HttpResponse('This is search')
+
+
+
+def viewProfile(request, username):
+    user = User.objects.get(username = username)
+    context = {
+        'user':user
+    }
+    return render(request, 'article/profilepublic.html',context)

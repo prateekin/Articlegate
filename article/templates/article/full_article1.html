@@ -43,7 +43,7 @@
             <div class="p-5 mb-1 bg-light rounded-3">
                 <div class="container-fluid py-5">
                     <h1 class="display-3 fw-bold">{{ post.title }}</h1>
-                    <p class="col-md-8 fs-4">{{ post.author }}</p>
+                    <a href="{% url 'article:viewProfile' post.author %}" style="text-decoration: none; color: black;"> <p class="col-md-8 fs-4">{{ post.author }}</p> </a> 
                     <p class="col-md-8 fs-5">{{ post.date_posted }}</p>
                 </div>
             </div>
@@ -88,6 +88,7 @@
                             <div class="col-md-12 col-lg-10">
                                 <!-- <div class="card text-dark"> -->
 
+                                {% if user.is_authenticated %}
 
 
                                 <div class="card-body p-4">
@@ -106,6 +107,23 @@
                                     </div>
                                 </div>
 
+                                {% else %}
+                                <div class="card-body p-4">
+                                    <div class="d-flex flex-start">
+                                        <img class="rounded-circle shadow-1-strong me-3"
+                                            src="https://plusvalleyadventure.com/wp-content/uploads/2020/11/default-user-icon-8.jpg" alt="avatar"
+                                            width="60" height="60" />
+                                            <!-- <form action="" > -->
+                                               
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control" placeholder="Comment something"
+                                                        aria-label="Recipient's username with two button addons" name="addComment" >
+                                                    <a href="{% url 'login' %}"> <button class="btn btn-outline-secondary">Comment</button> </a> 
+                                                </div>
+                                                <!-- </form>    -->
+                                    </div>
+                                </div>
+                                {% endif %}
                                 <hr class="my-0" />
 
                                 {% for comment in comments %}

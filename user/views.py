@@ -28,8 +28,9 @@ def profile(request):
     return render(request, 'user/profile.html',context) 
 
 
-@login_required
+
 def profileView(request):
+    # user = User.objects.get(username=user_id)
     user = request.user
     context = {
         'user' : user
