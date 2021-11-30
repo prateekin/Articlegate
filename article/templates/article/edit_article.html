@@ -17,12 +17,23 @@
     <button >Like </button>
     <form method="POST">
         {% csrf_token %}
-        <div>
+        <!-- <div>
             <input class="title" type="text" name="title" placeholder="TITLE HERE" value="{{ post.title }}">
         </div>
         <div>
             <input class="content" type="text" name="content" placeholder="Write Here" value="{{ post.content }}" size="200">
-        </div>
+        </div> -->
+    
+            <!-- <div>
+                <input class="title" type="text" name="title" placeholder="TITLE HERE">
+            </div>
+            <div>
+                <input class="content" type="text" name="content" placeholder="Write Here" size="200">
+            </div> -->
+            {{ form.media}}
+     
+            {{ form.as_p }}
+            
         <button type="submit">SAVE CHANGES</button>
     </form>
 

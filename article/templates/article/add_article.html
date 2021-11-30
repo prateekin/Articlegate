@@ -1,4 +1,5 @@
 {% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,12 +13,16 @@
     <h1>ADDING ARTICLE</h1>
     <form action="{% url 'article:addArticle' %}" method="POST">
         {% csrf_token %}
-        <div>
+
+
+        <!-- <div>
             <input class="title" type="text" name="title" placeholder="TITLE HERE">
         </div>
         <div>
             <input class="content" type="text" name="content" placeholder="Write Here" size="200">
-        </div>
+        </div> -->
+        {{ form.media}}
+        {{ form.as_p }}
         <button type="submit">ADD ARTICLE</button>
     </form>
     

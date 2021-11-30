@@ -4,14 +4,30 @@ from django.http import HttpResponse
 from django.contrib.auth.models import User 
 from .models import Post, Comment, Like
 from django.contrib.auth.decorators import login_required
+from .forms import CustomForm
 # Create your views here.
 
 def home(request):
-    context = {
-        # 'posts': Post.objects.all()
-        # stores top 50 liked objects
-        'posts' : Post.objects.order_by('-likes')[:50]
-    }
+    check = 0
+    if request.method == 'POST':
+        tag = request.POST.get('tagsearch')
+        posts = Post.objects.filter(tags=tag)
+        if tag == "":
+            check =1
+            posts = Post.objects.order_by('-date_posted')[:50]
+        context = {
+            # 'posts': Post.objects.all()
+            # stores top 50 liked objects
+            'posts' : posts,
+            'check' : check
+        }
+    else:
+        check = 0
+        context = {
+            'posts': Post.objects.order_by('-date_posted')[:50]
+            # stores top 50 liked objects
+        }
+    # return redirect()
     return render(request , 'article/home1.html', context)
 
 def fullArticle(request,title,article_id):
@@ -25,19 +41,6 @@ def fullArticle(request,title,article_id):
         # 'user':user
         }
 
-    # if request.method == 'GET':
-    #     visitors = post.like_set.all()
-    #     print(visitors)
-    #     temp = Like()
-    #     temp.post = post
-    #     temp.visitor = request.user.pk
-    #     if temp not in visitors:
-    #         post.likes += 1
-    #         post.save()
-    #         v = Like()
-    #         v.visitor = request.user.pk
-    #         v.post = post
-    #         v.save()
 
     if request.method == 'POST':
         content = request.POST.get('addComment')
@@ -54,15 +57,28 @@ def fullArticle(request,title,article_id):
 def addArticle(request):
     newPost = Post()
     user = User.objects.get(id=request.user.pk)
-    if request.method == 'POST':
-        title = request.POST.get('title')
-        content = request.POST.get('content')
-        newPost.title=title
-        newPost.content=content
-        newPost.author = user
-        newPost.save()
-
-    return render(request , 'article/add_article.html')
+    # if request.method == 'POST':
+    #     title = request.POST.get('title')
+    #     content = request.POST.get('content')
+    #     newPost.title=title
+    #     newPost.content=content
+    #     newPost.author = user
+    #     newPost.save()
+    if request.method != 'POST':
+        form = CustomForm()
+    else:
+        form = CustomForm(data=request.POST)
+        if form.is_valid():
+            form.save()
+            x = Post.objects.get(author=None)
+            y = request.user
+            x.author = y
+            x.save()
+            return redirect('../../../')
+    context = {
+        'form':form
+    }
+    return render(request , 'article/add_article.html',context)
 
 @login_required
 def editArticle(request,title, article_id):
@@ -71,14 +87,29 @@ def editArticle(request,title, article_id):
     if request.user.pk == post.author.pk:
         comments = post.comment_set.all()
 
-        if request.method == 'POST':
-            post.title = request.POST.get('title')
-            post.content = request.POST.get('content')
-            post.save()
-            # return redirect(fullArticle, user=post.title, article_id=post.id)
-            return redirect(f'../../../article/{post.title}/{post.id}')
+        # if request.method == 'POST':
+        #     post.title = request.POST.get('title')
+        #     post.content = request.POST.get('content')
+        #     post.save()
+        #     # return redirect(fullArticle, user=post.title, article_id=post.id)
+        #     return redirect(f'../../../article/{post.title}/{post.id}')
 
+        # if request.method == 'POST':
+        #     form = CustomForm(request.POST, instance=request.user)
+        #     if form.is_valid():
+        #         form.save()
+        #         return redirect('article:article-home')
+        # else:
+        #     form = CustomForm(instance=request.user)
+        # if request.method != 'POST':
+        #     form = CustomForm()
+        # else:
+        #     form = CustomForm(data=request.POST)
+        #     if form.is_valid():
+        #         form.save()
+        #         return redirect('../../../')
         context = {
+            'form':form,
             'post':post,
             'comments':comments,
             }

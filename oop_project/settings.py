@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'user.apps.UserConfig',
     'article.apps.ArticleConfig',
     'crispy_forms',
+    'ckeditor',
     # DEFAULT DJANGO APPS
     'django.contrib.admin',
     'django.contrib.auth',

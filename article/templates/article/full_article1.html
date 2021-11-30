@@ -25,6 +25,7 @@
 </style>
 
 <body>
+    <a href="{% url 'article:editArticle' post.title post.id %}">Make Changes.</a>
     <main>
         <div class="container py-4">
             <header class="pb-3 mb-4 border-bottom">
@@ -52,7 +53,7 @@
                 <div class="col-md-9 ">
                     <div class="h-100 p-5 text-black bg-light rounded-3 border border-dark">
                         <p class="fs-5 " style="text-align: justify;">
-                            <span class="fw-bold"> {{ post.content }} </span> 
+                            <span class="fw-bold"> {{ post.content|safe }} </span> 
                             Swap the background-color utility and add a
                             `.text-*` color utility to mix up the jumbotron look. Then, mix and match with additional
                             component themes and more. Lorem ipsum dolor sit amet consectetur adipisicing elit. Est
