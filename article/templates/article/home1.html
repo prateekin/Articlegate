@@ -19,14 +19,25 @@
             <span class="ml-3 text-xl">Article Gate</span>
           </a>
           <nav class="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center">
-            <a class="mr-5 hover:text-gray-900">First Link</a>
-            <a class="mr-5 hover:text-gray-900">Second Link</a>
-            <a class="mr-5 hover:text-gray-900">Third Link</a>
-            <a class="mr-5 hover:text-gray-900">Fourth Link</a>
+            <a class="mr-5 hover:text-gray-900">About us</a>
+            <a class="mr-5 hover:text-gray-900">Notes </a>
+            <!-- <a class="mr-5 hover:text-gray-900">Third Link</a>
+            <a class="mr-5 hover:text-gray-900">Fourth Link</a> -->
           </nav>
+          <form method="get" action="/article/search">
+            <div class="flex items-center border-b border-teal-500 py-1">
+              <input class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-0 px-1 leading-tight focus:outline-none" type="text" placeholder="Search" aria-label="Full name" name="query" id="search">
+              <button class="flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white py-0 px-2 rounded" type="submit">
+                Search
+              </button>
+            </div>
+          </form>
           {% if user.is_authenticated %}
           <button class="inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0">
-              <a href="#">{{ user.username }}</a> 
+              <a href="{% url 'article:addArticle' %}">Create Post</a> 
+          </button>
+          <button class="inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0">
+              <a href="{% url 'profileView' %}">{{ user.username }}</a> 
           </button>
           <button class="inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0">
               <a href="{% url 'login' %}">Logout</a> 

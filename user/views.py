@@ -2,6 +2,7 @@ from django.contrib.auth.models import User
 from django.shortcuts import render,redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import login,logout
 from django.contrib import messages
 from .forms import UserRegistrationForm,UserUpdateForm, ProfileUpdateForm
 # Create your views here.
@@ -36,6 +37,9 @@ def profileView(request):
     return render(request, 'user/profileview.html',context)
 
 
+# def signout(request):
+#     logout(request)
+#     return redirect('../login.html/')
 
 def signUp(request):
     if request.method == 'POST':

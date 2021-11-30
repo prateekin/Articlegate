@@ -26,6 +26,8 @@ class Like(models.Model):
 
 class Comment(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    author = models.CharField(default="",max_length=25)
+    image_url = models.CharField(default="",max_length=100)
     comment = models.TextField()
     likes = models.IntegerField(default=0)
     date_posted = models.DateTimeField(default=timezone.now)

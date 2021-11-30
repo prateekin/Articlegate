@@ -1,3 +1,4 @@
+from django.core.checks import messages
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.models import User 
@@ -13,7 +14,7 @@ def home(request):
     }
     return render(request , 'article/home1.html', context)
 
-def fullArticle(request,user,article_id):
+def fullArticle(request,title,article_id):
     # print(article_id)
     post = Post.objects.get(id=article_id)
     comments = post.comment_set.order_by('-date_posted')
@@ -39,10 +40,13 @@ def fullArticle(request,user,article_id):
     if request.method == 'POST':
         content = request.POST.get('addComment')
         com = Comment(post=post,comment=content)
+        com.author = request.user.username
+        com.image_url = request.user.profile.image.url
         com.save()
-        return render(request, 'article/full_article.html', context=context)
+        # return render(request, 'article/full_article1.html', context=context)
+        return redirect(f'../../{post.title}/{post.id}')
 
-    return render(request, 'article/full_article.html', context=context)
+    return render(request, 'article/full_article1.html', context=context)
 
 @login_required
 def addArticle(request):
@@ -59,7 +63,7 @@ def addArticle(request):
     return render(request , 'article/add_article.html')
 
 @login_required
-def editArticle(request,user, article_id):
+def editArticle(request,title, article_id):
     # print(article_id)
     post = Post.objects.get(id=article_id)
     if request.user.pk == post.author.pk:
@@ -79,3 +83,20 @@ def editArticle(request,user, article_id):
         return render(request, 'article/edit_article.html', context=context)
     else:
         return HttpResponse('<p> You are not authorised to edit this article </p>') 
+
+
+def search(request):
+    query = request.GET['query']
+    if len(query) == 0 or len(query) > 32:
+        allposts = Post.objects.none()
+    else:
+        postTitle = Post.objects.filter(title__icontains=query)
+        postContent = Post.objects.filter(content__icontains=query)
+        allposts = postTitle.union(postContent)
+    # print(allposts)
+    context = {
+        'allposts':allposts,
+        'query':query
+    }
+    return render(request, 'article/search.html',context)
+    # return HttpResponse('This is search')
