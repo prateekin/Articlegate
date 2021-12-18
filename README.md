@@ -1,14 +1,23 @@
 # Articlegate
 
-Steps to use 
-1. open Cmd in the downloaded folder and run the following command.
-````
- oop_project_env\Scripts\activate.bat
-````
+Clone the project
+
+```bash
+  git clone https://github.com/prateekin/Articlegate
+```
 
 
-2. Download the files in the folder ArticleGate
-````
- pip install pillow
- pip install django-crispy-forms
-````
+Install dependencies
+
+```bash
+  pip install pillow
+  pip install django-crispy-forms
+  pip install django-ckeditor 
+  pip install django-taggit
+```
+
+Start the server
+
+```bash
+  python mange.py runserver
+```
