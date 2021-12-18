@@ -1,34 +1,40 @@
 from django.core.checks import messages
-from django.shortcuts import render, redirect
+from django.shortcuts import get_object_or_404, render, redirect
 from django.http import HttpResponse
-from django.contrib.auth.models import User 
-from .models import Post, Comment, Like
+from django.contrib.auth.models import User
+from .models import Post, Comment, Tag
 from django.contrib.auth.decorators import login_required
 from .forms import CustomForm
 # Create your views here.
 
 def home(request):
     check = 0
-    if request.method == 'POST':
-        tag = request.POST.get('tagsearch')
-        posts = Post.objects.filter(tags=tag)
-        if tag == "":
-            check =1
-            posts = Post.objects.order_by('-date_posted')[:50]
-        context = {
-            # 'posts': Post.objects.all()
-            # stores top 50 liked objects
-            'posts' : posts,
-            'check' : check
-        }
-    else:
-        check = 0
-        context = {
-            'posts': Post.objects.order_by('-date_posted')[:50]
+    list_tags = []
+    l_tags_intial = Tag.objects.all()
+    for i in l_tags_intial:
+        if i.tag not in list_tags:
+            list_tags.append(i.tag)
+    print(list_tags)
+    context = {
+            'posts': Post.objects.order_by('-date_posted')[:50],
+            'list_tags':list_tags,
             # stores top 50 liked objects
         }
-    # return redirect()
     return render(request , 'article/home1.html', context)
+
+
+def tagName(request, tagname):
+    list_tag_obj = []
+    objs = Post.objects.all()
+    for obj in objs:
+        if obj.tags == tagname:
+            list_tag_obj.append(obj)
+    context = {
+        'list_tag_obj':list_tag_obj,
+        'tagname':tagname
+    }
+    return render(request, 'article/tag_search.html', context)
+
 
 def fullArticle(request,title,article_id):
     # print(article_id)
@@ -57,24 +63,22 @@ def fullArticle(request,title,article_id):
 def addArticle(request):
     newPost = Post()
     user = User.objects.get(id=request.user.pk)
-    # if request.method == 'POST':
-    #     title = request.POST.get('title')
-    #     content = request.POST.get('content')
-    #     newPost.title=title
-    #     newPost.content=content
-    #     newPost.author = user
-    #     newPost.save()
     if request.method != 'POST':
         form = CustomForm()
     else:
-        form = CustomForm(data=request.POST)
-        if form.is_valid():
-            form.save()
-            x = Post.objects.get(author=None)
-            y = request.user
-            x.author = y
-            x.save()
-            return redirect('../../../')
+        newPost.author = user
+        newPost.title = request.POST['title']
+        newPost.about = request.POST['about']
+        newPost.content = request.POST['content']
+        newPost.tags = request.POST['tags']
+        newPost.save()
+        t = request.POST['tags']
+        t1 = Tag()
+        t1.post = newPost
+        t1.tag  = request.POST['tags']
+        t1.save()
+        return redirect('../../../')
+
     context = {
         'form':form
     }
@@ -82,32 +86,22 @@ def addArticle(request):
 
 @login_required
 def editArticle(request,title, article_id):
-    # print(article_id)
     post = Post.objects.get(id=article_id)
     if request.user.pk == post.author.pk:
         comments = post.comment_set.all()
-
-        # if request.method == 'POST':
-        #     post.title = request.POST.get('title')
-        #     post.content = request.POST.get('content')
-        #     post.save()
-        #     # return redirect(fullArticle, user=post.title, article_id=post.id)
-        #     return redirect(f'../../../article/{post.title}/{post.id}')
-
-        # if request.method == 'POST':
-        #     form = CustomForm(request.POST, instance=request.user)
-        #     if form.is_valid():
-        #         form.save()
-        #         return redirect('article:article-home')
-        # else:
-        #     form = CustomForm(instance=request.user)
-        # if request.method != 'POST':
-        #     form = CustomForm()
-        # else:
-        #     form = CustomForm(data=request.POST)
-        #     if form.is_valid():
-        #         form.save()
-        #         return redirect('../../../')
+        data_original = {
+            'title': post.title,
+            'about' : post.about,
+            'content': post.content,
+        }
+        if request.method != 'POST':
+            form = CustomForm(data = data_original)
+        else:
+            post.title = request.POST['title']
+            post.about = request.POST['about']
+            post.content = request.POST['content']
+            post.save()
+            return redirect('../../../')
         context = {
             'form':form,
             'post':post,
@@ -126,13 +120,11 @@ def search(request):
         postTitle = Post.objects.filter(title__icontains=query)
         postContent = Post.objects.filter(content__icontains=query)
         allposts = postTitle.union(postContent)
-    # print(allposts)
     context = {
         'allposts':allposts,
         'query':query
     }
     return render(request, 'article/search.html',context)
-    # return HttpResponse('This is search')
 
 
 

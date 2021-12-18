@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'article.apps.ArticleConfig',
     'crispy_forms',
     'ckeditor',
+    'taggit',
     # DEFAULT DJANGO APPS
     'django.contrib.admin',
     'django.contrib.auth',
@@ -129,7 +130,7 @@ MEDIA_URL = '/media/'
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
-
+TAGGIT_CASE_INSENSITIVE = True
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 LOGIN_REDIRECT_URL = 'profile'

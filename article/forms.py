@@ -6,9 +6,10 @@ from .models import Post
 class CustomForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ['title','content','tags']
+        fields = ['title','about','content','tags']
         labels = {
-            'title' : "",
-            'content' : "",
-            'tags' : "",
+            'title' : "Title",
+            'about' : "Short Description",
+            'content' : "Content",
+            'tags' : "Tags",
         }
