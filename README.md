@@ -1,4 +1,4 @@
-![Logo](https://cdn.discordapp.com/attachments/912728915930394666/921786381682999377/unknown-removebg-preview.png)
+
 
 
 # Article Gate
