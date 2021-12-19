@@ -1,4 +1,29 @@
-# Articlegate
+![Logo](https://cdn.discordapp.com/attachments/912728915930394666/921786381682999377/unknown-removebg-preview.png)
+
+
+# Article Gate
+
+Article Gate is a place to write, read, and connect
+It's easy and free to post your thinking on any topic and connect with thousands of readers. Article Gate is a community of 1000 amazing writers, developers, poets and many more ...
+
+
+## Features
+
+- Easy and clean interface
+- Custom Tags are given to each article 
+- Powerfull Search option 
+
+
+## Tech Stack
+
+**Client&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:** HTML, CSS, JavaScript, TailwindCSS, Bootstrap 5
+
+**Server &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:** Django
+
+**Databases&nbsp;:** sqlite3
+
+
+## Run Locally
 
 Clone the project
 
@@ -21,3 +46,47 @@ Start the server
 ```bash
   python manage.py runserver
 ```
+
+
+## Screenshots
+
+![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+
+
+## Lessons Learned
+
+- To design using CSS, Bootstrap, Tailwind
+- To work with Django Application
+- To work with Databases
+- To work in a Team
+
+
+## Feedback
+
+If you have any feedback, please reach out to us at prateekagrawalco@gmail.com
+
+
+## FAQ's
+
+#### Why should I use this website ? What makes it different ?
+
+Well , we at ArticleGate offer a very clean website interface and we provide a easy interface to the user. Here are some of the features :
+- Easy and clean interface
+- Custom Tags are given to each article 
+- Powerfull Search option 
+
+#### Do I need to signup to view articles ? 
+
+Unlike many other websites you need not signup to view an article
+Note : To write your own articles and to comment to other's article a user needs to create an account which is a very simple process.
+
+
+## Authors
+
+- [@prateekin](https://www.github.com/prateekin)
+
+
+## Support
+
+For support, email prateekagrawalco@gmail.com .
+
