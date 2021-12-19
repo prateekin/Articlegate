@@ -50,7 +50,7 @@ Start the server
 
 ## Screenshots
 
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+![App Screenshot](https://cdn.discordapp.com/attachments/912728915930394666/922185282508427304/unknown.png)
 
 
 ## Lessons Learned
