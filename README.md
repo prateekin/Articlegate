@@ -18,7 +18,7 @@ It's easy and free to post your thinking on any topic and connect with thousands
 
 **Client&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:** HTML, CSS, JavaScript, TailwindCSS, Bootstrap 5
 
-**Backend & Development Server &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:** Django
+**Server &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:** Django
 
 **Databases&nbsp;:** sqlite3
 
