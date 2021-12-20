@@ -90,7 +90,7 @@ Note : To write your own articles and to comment to other's article a user needs
 - Mohammed Abdul Haseeb	20BCS085
 - Ravikant	20BCS110
 - Samarth Santosh Kolkar	20BCS115
-- Prateek Agrawal	20BCS101(https://www.github.com/prateekin)
+- [Prateek Agrawal	20BCS101](https://www.github.com/prateekin)
 - Hitarth Vyas 	20BCS060
 - Janardhana reddy S	20BCS062
 
