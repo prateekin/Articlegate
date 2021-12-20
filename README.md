@@ -1,4 +1,4 @@
-![Logo](https://cdn.discordapp.com/attachments/912728915930394666/921786381682999377/unknown-removebg-preview.png)
+
 
 
 # Article Gate
@@ -50,7 +50,7 @@ Start the server
 
 ## Screenshots
 
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+![App Screenshot](https://cdn.discordapp.com/attachments/912728915930394666/922185282508427304/unknown.png)
 
 
 ## Lessons Learned
@@ -81,9 +81,18 @@ Unlike many other websites you need not signup to view an article
 Note : To write your own articles and to comment to other's article a user needs to create an account which is a very simple process.
 
 
-## Authors
+## Developers
 
 - [@prateekin](https://www.github.com/prateekin)
+
+## Team Members
+
+- Mohammed Abdul Haseeb	20BCS085
+- Ravikant	20BCS110
+- Samarth Santosh Kolkar	20BCS115
+- Prateek Agrawal	20BCS101
+- Hitarth Vyas 	20BCS060
+- Janardhana reddy S	20BCS062
 
 
 ## Support
