@@ -39,6 +39,7 @@ Install dependencies
   pip install django-crispy-forms
   pip install django-ckeditor 
   pip install django-taggit
+  pip install crispy-bootstrap4
 ```
 
 Start the server
