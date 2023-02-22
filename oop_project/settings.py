@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'user.apps.UserConfig',
     'article.apps.ArticleConfig',
     'crispy_forms',
+    'crispy_bootstrap4',
     'ckeditor',
     'taggit',
     # DEFAULT DJANGO APPS
@@ -133,5 +134,6 @@ MEDIA_URL = '/media/'
 TAGGIT_CASE_INSENSITIVE = True
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
 LOGIN_REDIRECT_URL = 'profile'
 LOGIN_URL = 'login'
